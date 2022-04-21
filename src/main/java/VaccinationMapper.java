@@ -18,10 +18,12 @@ public class VaccinationMapper
         String[] split = line.split(",");
         split[65] = split[65].substring(0,split[65].length()-1);
 
+        if(split[0].equals("Date")){
+            return;
+        }
+        String output = String.join(",",split[0],split[3],split[5],split[7],split[17],split[29]);
 
-            String output = String.join(",",split[0],split[3],split[5],split[7],split[17],split[29]);
-
-            if(split[5].length()>0 && split[7].length() > 0 && split[17].length() >0 && split[29].length() >0)
-                context.write(NullWritable.get(), new Text(output));
+        if(split[5].length()>0 && split[7].length() > 0 && split[17].length() >0 && split[29].length() >0)
+            context.write(NullWritable.get(), new Text(output));
     }
 }
