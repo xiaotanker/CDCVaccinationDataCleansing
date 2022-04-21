@@ -21,8 +21,7 @@ public class VaccinationMapper
 
             String output = String.join(",",split[0],split[3],split[5],split[7],split[17],split[29]);
 
-            context.write(NullWritable.get(), new Text(output));
-
-
+            if(split[5].length()>0 && split[7].length() > 0 && split[17].length() >0 && split[29].length() >0)
+                context.write(NullWritable.get(), new Text(output));
     }
 }
