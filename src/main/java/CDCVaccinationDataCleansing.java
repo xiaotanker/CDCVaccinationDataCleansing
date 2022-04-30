@@ -18,9 +18,10 @@ public class CDCVaccinationDataCleansing {
         job.setJarByClass(CDCVaccinationDataCleansing.class);
         FileInputFormat.addInputPath(job, new Path(args[0]));
         FileOutputFormat.setOutputPath(job, new Path(args[1]));
+        job.setReducerClass(VaccinationReducer.class);
         job.setMapperClass(VaccinationMapper.class);
-        job.setNumReduceTasks(0);
-        job.setOutputKeyClass(NullWritable.class);
+        job.setNumReduceTasks(1);
+        job.setOutputKeyClass(Text.class);
         job.setOutputValueClass(Text.class);
         job.waitForCompletion(true);
 
