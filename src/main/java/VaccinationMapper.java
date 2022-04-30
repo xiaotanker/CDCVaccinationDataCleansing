@@ -26,10 +26,11 @@ public class VaccinationMapper
         String output = String.join(",", month ,split[3],split[5],split[7],split[17],split[29]);
 
 
-        if(split[5].length()>0 && split[7].length() > 0 && split[17].length() >0 && split[29].length() >0)
-            if(split[5].equals("0") && split[7].equals("0") && split[17].equals("0") && split[29].equals("0")){
+        if(split[5].length()>0 || split[7].length() > 0 || split[17].length() >0 || split[29].length() >0) {
+            if (split[5].equals("0") && split[7].equals("0") && split[17].equals("0") && split[29].equals("0")) {
                 return;
             }
-            context.write(new Text(String.join(",",month,split[3])), new Text(output));
+            context.write(new Text(String.join(",", month, split[3])), new Text(output));
+        }
     }
 }
